@@ -1,0 +1,18 @@
+{
+  "npmScope": "banklet-api",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "banklet-api-e2e": {
+      "tags": []
+    },
+    "banklet-api": {
+      "tags": []
+    }
+  }
+}

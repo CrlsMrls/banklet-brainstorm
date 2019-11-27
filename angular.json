@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "projects": {
+    "banklet-api": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/banklet-api",
+      "sourceRoot": "apps/banklet-api/src",
+      "prefix": "banklet-api",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/banklet-api",
+            "index": "apps/banklet-api/src/index.html",
+            "main": "apps/banklet-api/src/main.ts",
+            "polyfills": "apps/banklet-api/src/polyfills.ts",
+            "tsConfig": "apps/banklet-api/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/banklet-api/src/favicon.ico",
+              "apps/banklet-api/src/assets"
+            ],
+            "styles": ["apps/banklet-api/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/banklet-api/src/environments/environment.ts",
+                  "with": "apps/banklet-api/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "banklet-api:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "banklet-api:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "banklet-api:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/banklet-api/tsconfig.app.json",
+              "apps/banklet-api/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/banklet-api/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/banklet-api/jest.config.js",
+            "tsConfig": "apps/banklet-api/tsconfig.spec.json",
+            "setupFile": "apps/banklet-api/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "banklet-api-e2e": {
+      "root": "apps/banklet-api-e2e",
+      "sourceRoot": "apps/banklet-api-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/banklet-api-e2e/cypress.json",
+            "tsConfig": "apps/banklet-api-e2e/tsconfig.e2e.json",
+            "devServerTarget": "banklet-api:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "banklet-api:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/banklet-api-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/banklet-api-e2e/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "banklet-api"
+}
