@@ -3,5 +3,5 @@
   "compilerOptions": {
     "types": ["node", "jest"]
   },
-  "include": ["**/*.ts", "../../libs/core/src/lib/banklet.module.ts"]
+  "include": ["**/*.ts"]
 }

@@ -15,7 +15,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@banklet-api/mybanklet": ["libs/mybanklet/src/index.ts"],
+      "@banklet-api/core": ["libs/core/src/index.ts"],
+      "@banklet-api/mybanklet2": ["libs/mybanklet2/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

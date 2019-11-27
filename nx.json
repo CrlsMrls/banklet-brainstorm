@@ -13,6 +13,15 @@
     },
     "banklet-api": {
       "tags": []
+    },
+    "mybanklet": {
+      "tags": []
+    },
+    "core": {
+      "tags": []
+    },
+    "mybanklet2": {
+      "tags": []
     }
   }
 }

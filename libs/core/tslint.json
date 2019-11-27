@@ -1,0 +1,7 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [true, "attribute", "bankletApi", "camelCase"],
+    "component-selector": [true, "element", "banklet-api", "kebab-case"]
+  }
+}

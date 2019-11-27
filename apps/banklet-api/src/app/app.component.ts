@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Injector, NgModuleFactoryLoader, Compiler, ViewChild } from '@angular/core';
+import { BankletComponentCreator, CreateComponent } from '@banklet-api/core';
 
 @Component({
   selector: 'banklet-api-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'banklet-api';
+  @ViewChild('ref', {static: true}) ref; 
+  constructor(private c: BankletComponentCreator) {
+    setTimeout(() => {
+      c.create(import('@banklet-api/mybanklet2'), this.ref, {});
+    });
+  }
 }
+
+// TODO: make API less clunky 

@@ -123,6 +123,87 @@
           }
         }
       }
+    },
+    "mybanklet": {
+      "projectType": "library",
+      "root": "libs/mybanklet",
+      "sourceRoot": "libs/mybanklet/src",
+      "prefix": "banklet-api",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/mybanklet/tsconfig.lib.json",
+              "libs/mybanklet/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/mybanklet/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/mybanklet/jest.config.js",
+            "tsConfig": "libs/mybanklet/tsconfig.spec.json",
+            "setupFile": "libs/mybanklet/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "core": {
+      "projectType": "library",
+      "root": "libs/core",
+      "sourceRoot": "libs/core/src",
+      "prefix": "banklet-api",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/core/tsconfig.lib.json",
+              "libs/core/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/core/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/core/jest.config.js",
+            "tsConfig": "libs/core/tsconfig.spec.json",
+            "setupFile": "libs/core/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "mybanklet2": {
+      "projectType": "library",
+      "root": "libs/mybanklet2",
+      "sourceRoot": "libs/mybanklet2/src",
+      "prefix": "banklet-api",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/mybanklet2/tsconfig.lib.json",
+              "libs/mybanklet2/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/mybanklet2/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/mybanklet2/jest.config.js",
+            "tsConfig": "libs/mybanklet2/tsconfig.spec.json",
+            "setupFile": "libs/mybanklet2/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
     }
   },
   "cli": {
