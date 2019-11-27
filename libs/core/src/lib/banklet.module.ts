@@ -1,6 +1,5 @@
 import {
   NgModule,
-  ɵNgModuleDef,
   ModuleWithProviders,
   ANALYZE_FOR_ENTRY_COMPONENTS,
   Inject,
@@ -27,6 +26,7 @@ interface NonRoutableOptions {
 
 @NgModule({})
 export class BankletModule {
+
   static configureBankletRoutes(
     options: RoutableOptions
   ): ModuleWithProviders<BankletModule> {
@@ -48,21 +48,20 @@ export class BankletModule {
 
 @Injectable()
 export class BankletComponentCreator {
-  constructor(private compiler: Compiler, private inj: Injector){}
-  // TODO: do not pass the dom element to attach, return the component and append to DOM in the application
-  create(bankletModulePromise: Promise<any>, domelement: any, params: any) {
-    bankletModulePromise.then(m => {
+  constructor(private compiler: Compiler, private injector: Injector) { }
+  createComponentFactory(bankletModulePromise: Promise<any>) {
+    return bankletModulePromise.then(m => {
       // check if Module is already a factory => then skip
       return this.compiler.compileModuleAsync(m.MybankletModule);
-    }).then(f => {
-      const m = f.create(this.inj);
-      m.injector.get(CreateComponent).create(domelement, params);
+    }).then(moduleFactory => {
+      const m = moduleFactory.create(this.injector);
+      return m.injector.get(ComponentFactory);
     })
   }
 }
 
 class CheckSchema {
-  constructor(@Inject('options') private options: RoutableOptions) {}
+  constructor(@Inject('options') private options: RoutableOptions) { }
 
   canActivate(route: ActivatedRouteSnapshot) {
     // validate route against schema
@@ -99,12 +98,12 @@ export function getRouteProviders<TConfig>(options: RoutableOptions) {
 }
 
 @Injectable()
-export class CreateComponent {
+export class ComponentFactory {
   constructor(
     @Inject('options') private options: NonRoutableOptions,
     private cmp: ComponentFactoryResolver,
     private injector: Injector
-  ) {}
+  ) { }
 
   create(element: any, params: any) {
     // validate route against schema
@@ -112,14 +111,14 @@ export class CreateComponent {
     const ref = this.cmp
       .resolveComponentFactory(this.options.component as any)
       .create(this.injector);
-    
-      element.nativeElement.appendChild(ref.location.nativeElement);
+
+    element.nativeElement.appendChild(ref.location.nativeElement);
   }
 }
 
 export function getComponentProviders(options: NonRoutableOptions) {
   return [
-    CreateComponent,
+    ComponentFactory,
     {
       provide: 'options',
       useValue: options
