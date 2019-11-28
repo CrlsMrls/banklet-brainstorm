@@ -6,7 +6,10 @@ import {
   Injectable,
   ComponentFactoryResolver,
   Injector,
-  Compiler
+  NgModuleFactory,
+  NgModuleRef,
+  Compiler,
+  NgModuleFactoryLoader
 } from '@angular/core';
 import { Route, ROUTES, ActivatedRouteSnapshot } from '@angular/router';
 import { Type } from '@angular/compiler';
@@ -24,7 +27,6 @@ interface NonRoutableOptions {
 
 @NgModule({})
 export class BankletModule {
-
   static configureBankletRoutes(
     options: RoutableOptions
   ): ModuleWithProviders<BankletModule> {
@@ -46,20 +48,27 @@ export class BankletModule {
 
 @Injectable()
 export class BankletComponentCreator {
-  constructor(private compiler: Compiler, private injector: Injector) { }
-  createComponentFactory(bankletModulePromise: Promise<any>) {
-    return bankletModulePromise.then(m => {
-      // check if Module is already a factory => then skip
-      return this.compiler.compileModuleAsync(m.MybankletModule);
-    }).then(moduleFactory => {
-      const m = moduleFactory.create(this.injector);
-      return m.injector.get(ComponentFactory);
-    })
+  constructor(private compiler: Compiler, private injector: Injector) {}
+
+  async createComponentFactory(bankletModuleRefPromise: Promise<any>) {
+    const moduleFactory: NgModuleFactory<BankletModule> = await this.getModuleFactory(bankletModuleRefPromise);
+    const moduleRef: NgModuleRef<BankletModule> = moduleFactory.create(this.injector);
+    return moduleRef.injector.get(ComponentFactory);
+  }
+
+  private async getModuleFactory(
+    modulePromise: Promise<NgModuleRef<BankletModule>>
+  ): Promise<NgModuleFactory<BankletModule>> {
+    const module: any = await modulePromise;
+    if (module.MybankletModule instanceof NgModuleFactory) {
+      return module.MybankletModule;
+    }
+    return await this.compiler.compileModuleAsync(module.MybankletModule);
   }
 }
 
 class CheckSchema {
-  constructor(@Inject('options') private options: RoutableOptions) { }
+  constructor(@Inject('options') private options: RoutableOptions) {}
 
   canActivate(route: ActivatedRouteSnapshot) {
     // validate route against schema
@@ -101,7 +110,7 @@ export class ComponentFactory {
     @Inject('options') private options: NonRoutableOptions,
     private cmp: ComponentFactoryResolver,
     private injector: Injector
-  ) { }
+  ) {}
 
   create(element: any, params: any) {
     // validate route against schema

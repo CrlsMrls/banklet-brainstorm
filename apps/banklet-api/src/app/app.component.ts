@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit, ViewEncapsulation } from '@angular/core';
-import { BankletComponentCreator, CreateComponent } from '@banklet-api/core';
+import { BankletComponentCreator } from '@banklet-api/core';
 
 @Component({
   selector: 'banklet-api-root',
@@ -10,13 +10,10 @@ import { BankletComponentCreator, CreateComponent } from '@banklet-api/core';
 export class AppComponent implements OnInit {
   @ViewChild('ref', { static: true }) ref;
 
-  constructor(private bankletComponentCreator: BankletComponentCreator) {
-  }
+  constructor(private bankletComponentCreator: BankletComponentCreator) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.bankletComponentCreator.createComponentFactory(import('@banklet-api/mybanklet2'))
       .then(componentFactory => componentFactory.create(this.ref, {}));
   }
 }
-
-// TODO: make API less clunky 
