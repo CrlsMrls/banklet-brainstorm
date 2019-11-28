@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.bankletComponentCreator.createComponentFactory(import('@banklet-api/mybanklet2'))
       .then(componentFactory => componentFactory.create(this.ref, {}));
+    this.bankletComponentCreator.createComponentFactory(import('@banklet-api/mybanklet2'))
+      .then(componentFactory => componentFactory.create(this.ref, {}));
   }
 }
 

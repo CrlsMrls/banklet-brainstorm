@@ -130,6 +130,13 @@
       "sourceRoot": "libs/mybanklet/src",
       "prefix": "banklet-api",
       "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/mybanklet/tsconfig.lib.json",
+            "project": "libs/mybanklet/ng-package.json"
+          }
+        },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
@@ -157,6 +164,13 @@
       "sourceRoot": "libs/core/src",
       "prefix": "banklet-api",
       "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/core/tsconfig.lib.json",
+            "project": "libs/core/ng-package.json"
+          }
+        },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
@@ -184,6 +198,13 @@
       "sourceRoot": "libs/mybanklet2/src",
       "prefix": "banklet-api",
       "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/mybanklet2/tsconfig.lib.json",
+            "project": "libs/mybanklet2/ng-package.json"
+          }
+        },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {

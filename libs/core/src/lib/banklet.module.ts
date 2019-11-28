@@ -8,9 +8,7 @@ import {
   Injector,
   Compiler
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Route, ROUTES, ActivatedRouteSnapshot } from '@angular/router';
-import { stringify } from '@angular/compiler/src/util';
 import { Type } from '@angular/compiler/src/output/output_ast';
 
 interface RoutableOptions {
@@ -24,6 +22,7 @@ interface NonRoutableOptions {
   params: any;
 }
 
+// @dynamic
 @NgModule({})
 export class BankletModule {
 
