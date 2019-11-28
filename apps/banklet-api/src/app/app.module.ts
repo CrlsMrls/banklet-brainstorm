@@ -12,8 +12,7 @@ import { BankletComponentCreator } from '@banklet-api/core';
     RouterModule.forRoot([
       {
         path: 'banklet',
-        loadChildren: () =>
-          import('@banklet-api/mybanklet').then(m => m.MybankletModule)
+        loadChildren: () => import('@banklet-api/mybanklet').then(m => m.MybankletModule)
       },
       {
         path: '',
@@ -25,4 +24,4 @@ import { BankletComponentCreator } from '@banklet-api/core';
   providers: [BankletComponentCreator],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
