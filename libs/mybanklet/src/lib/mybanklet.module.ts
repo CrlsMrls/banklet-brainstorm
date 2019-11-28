@@ -1,25 +1,50 @@
 import { NgModule, Component } from '@angular/core';
-import {BankletModule} from '@banklet-api/core';
+import { RouterModule } from '@angular/router';
 
+import { BankletModule } from '@banklet-api/core';
 
 @Component({
-  selector: 'my-banklet1',
-  template: '<h4>hi from component 1</h4>'
+  selector: 'view1-1',
+  template: `
+    <div class="banklet">
+      <h4>Banklet 1 - First view</h4>
+      <a routerLink="../second"> Goto 2nd </a>
+    </div>
+    `
+  })
+  export class MybankletComponent {}
+  
+  @Component({
+    selector: 'view1-2',
+    template: `
+      <div class="banklet">
+        <h4>Banklet 1 - Second view</h4>
+        <a routerLink="../first"> Goto 1st </a>
+      </div>
+    `
 })
-export class MybankletComponent{}
-
+export class SecondViewComponent {}
 
 @NgModule({
-  declarations: [MybankletComponent],
-  imports: [BankletModule.configureBankletRoutes({
-    routes: [{
-      path: '', 
-      component: MybankletComponent
-    }],
-    params: {
-      id: 'number'
-    }
-    // add config schema
-  } as any)]
+  declarations: [MybankletComponent, SecondViewComponent],
+  imports: [
+    RouterModule,
+    BankletModule.configureBankletRoutes({
+      routes: [
+        {
+          path: 'first',
+          component: MybankletComponent
+        },
+        {
+          path: 'second',
+          component: SecondViewComponent
+        }
+      ],
+      params: {
+        id: 'number'
+      }
+      // add config schema
+    })
+  ]
 })
 export class MybankletModule {}

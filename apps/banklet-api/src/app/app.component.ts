@@ -1,9 +1,10 @@
-import { Component, Injector, NgModuleFactoryLoader, Compiler, ViewChild } from '@angular/core';
+import { Component, Injector, NgModuleFactoryLoader, Compiler, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BankletComponentCreator, CreateComponent } from '@banklet-api/core';
 
 @Component({
   selector: 'banklet-api-root',
   templateUrl: './app.component.html',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {

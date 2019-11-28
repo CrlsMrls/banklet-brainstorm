@@ -1,6 +1,5 @@
 import {
   NgModule,
-  ɵNgModuleDef,
   ModuleWithProviders,
   ANALYZE_FOR_ENTRY_COMPONENTS,
   Inject,
@@ -9,10 +8,8 @@ import {
   Injector,
   Compiler
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Route, ROUTES, ActivatedRouteSnapshot } from '@angular/router';
-import { stringify } from '@angular/compiler/src/util';
-import { Type } from '@angular/compiler/src/output/output_ast';
+import { Type } from '@angular/compiler';
 
 interface RoutableOptions {
   routes: Route[];
@@ -48,16 +45,18 @@ export class BankletModule {
 
 @Injectable()
 export class BankletComponentCreator {
-  constructor(private compiler: Compiler, private inj: Injector){}
+  constructor(private compiler: Compiler, private inj: Injector) {}
   // TODO: do not pass the dom element to attach, return the component and append to DOM in the application
   create(bankletModulePromise: Promise<any>, domelement: any, params: any) {
-    bankletModulePromise.then(m => {
-      // check if Module is already a factory => then skip
-      return this.compiler.compileModuleAsync(m.MybankletModule);
-    }).then(f => {
-      const m = f.create(this.inj);
-      m.injector.get(CreateComponent).create(domelement, params);
-    })
+    bankletModulePromise
+      .then(m => {
+        // check if Module is already a factory => then skip
+        return this.compiler.compileModuleAsync(m.MybankletModule);
+      })
+      .then(f => {
+        const m = f.create(this.inj);
+        m.injector.get(CreateComponent).create(domelement, params);
+      });
   }
 }
 
@@ -112,8 +111,8 @@ export class CreateComponent {
     const ref = this.cmp
       .resolveComponentFactory(this.options.component as any)
       .create(this.injector);
-    
-      element.nativeElement.appendChild(ref.location.nativeElement);
+
+    element.nativeElement.appendChild(ref.location.nativeElement);
   }
 }
 
