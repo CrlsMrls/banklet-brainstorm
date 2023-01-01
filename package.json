@@ -29,7 +29,7 @@
   },
   "private": true,
   "dependencies": {
-    "@nrwl/angular": "8.8.2",
+    "@nrwl/angular": "15.4.2",
     "@angular/animations": "^8.2.0",
     "@angular/common": "^8.2.0",
     "@angular/compiler": "^8.2.0",
@@ -54,7 +54,7 @@
     "prettier": "1.18.2",
     "@angular/compiler-cli": "^8.2.0",
     "@angular/language-service": "^8.2.0",
-    "@angular-devkit/build-angular": "^0.803.14",
+    "@angular-devkit/build-angular": "^15.0.4",
     "codelyzer": "~5.0.1",
     "jest-preset-angular": "7.0.0",
     "@nrwl/jest": "8.8.2",
@@ -62,6 +62,6 @@
     "@types/jest": "24.0.9",
     "ts-jest": "24.0.0",
     "cypress": "3.4.1",
-    "@nrwl/cypress": "8.8.2"
+    "@nrwl/cypress": "15.4.2"
   }
 }
