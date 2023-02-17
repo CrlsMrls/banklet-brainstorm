@@ -61,7 +61,7 @@
     "jest": "24.1.0",
     "@types/jest": "24.0.9",
     "ts-jest": "24.0.0",
-    "cypress": "3.4.1",
+    "cypress": "12.5.1",
     "@nrwl/cypress": "8.8.2"
   }
 }
